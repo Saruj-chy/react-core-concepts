@@ -3,55 +3,25 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  const nayoks = ['Samanshah', 'Sakib', 'Salman', 'Amir', 'Shahrukh', 'Razzak'];
-
   const products = [
     { name: 'Photoshop', price: '$90.99' },
     { name: 'Illustrator', price: '$69.99' },
     { name: 'PDF Reader', price: '$50.99' },
 
-  ];
-  const productNames = products.map(product => product.name)
-  console.log(productNames);
-  console.log(products.map(product => product));
+  ]
 
   return (
     <div className="App">
       <header className="App-header">
-        <ul>
-          <li style={{ color: 'yellow' }}>Nayok Names:</li>
-          {
-            nayoks.map(nayok => <li>{nayok}</li>)
-          }
-          <br />
-          <li>{nayoks[0]}</li>
-          <li>{nayoks[1]}</li>
-          <li>{nayoks[2]}</li>
-          <br />
-          <li style={{ color: 'red' }}>Products Name: </li>
-          {
-            products.map(product => <li>{product.name + " " + product.price}</li>)
-          }
-          <br />
+
+        <Product name={products[0].name} price={products[0].price} />
+
+        <Product2 product={products[0]} />
+        <Product2 product={products[1]} />
+        <Product2 product={products[2]} />
 
 
-        </ul>
-        {/* //==============    Product             */}
-        {
-          products.map(product => <Product name={product.name} price={product.price} />)
-        }
-        {/* ===================    Product2           */}
-
-        {
-          products.map(product => <Product2 product={product} />)
-        }
-        {/* ==================      Product3          */}
-        {
-          products.map(product => <Product3 product={product} />)
-        }
-
-
-
+        <Product3 product={products[0]} />
 
       </header>
 
@@ -88,7 +58,7 @@ function Product2(props) {
   const productStyle = {
 
     padding: '10px',
-    backgroundColor: 'yellow',
+    backgroundColor: 'lightgray',
     border: '1px solid gray',
     borderRadius: '5px',
     height: '200px',
