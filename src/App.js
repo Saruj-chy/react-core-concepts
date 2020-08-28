@@ -3,44 +3,106 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
-  var name = "Dr. A.k. boishakh";
-  var person = {
-    fname: 'Saruj',
-    lName: 'Datta',
-    title: 'Developer'
-  }
-  var style = {
-    color : 'red',
-    fontSize: 50,
-    backgroundColor: 'yellow'
-  }
+  const products = [
+    { name: 'Photoshop', price: '$90.99' },
+    { name: 'Illustrator', price: '$69.99' },
+    { name: 'PDF Reader', price: '$50.99' },
+
+  ]
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
 
-          Learn React
-          
-        </a>
+        <Product name={products[0].name} price={products[0].price} />
 
-        <h3 style={style}>Doctor name: {name} </h3>
-  <h5>Title: {person.title} <br/> Name: {person.fname+" "+ person.lName}  </h5>
+        <Product2 product={products[0]} />
+        <Product2 product={products[1]} />
+        <Product2 product={products[2]} />
 
-        <p style= {{ color : 'blue',}}>My First React Paragraph</p>
-  <p>Calculate math: { 5 + 15 }</p>
+
+        <Product3 product={products[0]} />
+
       </header>
 
     </div>
   );
 }
+
+//============================    
+function Product(props) {
+  const productStyle = {
+
+    padding: '10px',
+    backgroundColor: 'lightgray',
+    border: '1px solid gray',
+    borderRadius: '5px',
+    height: '200px',
+    weight: '200px',
+    float: 'left',
+
+
+  }
+  return (
+    <div style={productStyle}>
+      <h2>Name: {props.name} </h2>
+      <h3>Price: {props.price}</h3>
+      <button>Buy Now</button>
+
+    </div>
+  )
+}
+
+//==================================================  array hishebe patale
+function Product2(props) {
+  const productStyle = {
+
+    padding: '10px',
+    backgroundColor: 'lightgray',
+    border: '1px solid gray',
+    borderRadius: '5px',
+    height: '200px',
+    weight: '200px',
+    float: 'left',
+
+
+  }
+  console.log(props.product.name);
+  return (
+    <div style={productStyle}>
+      <h2>Name: {props.product.name} </h2>
+      <h3>Price: {props.product.price}</h3>
+      <button>Buy Now</button>
+
+    </div>
+  )
+}
+
+//==================================================  array hishebe patale
+function Product3(props) {
+  const productStyle = {
+
+    padding: '10px',
+    backgroundColor: 'lightgray',
+    border: '1px solid gray',
+    borderRadius: '5px',
+    height: '200px',
+    weight: '200px',
+    float: 'left',
+
+
+  }
+  const { name, price } = props.product; //===========   component set kore
+  console.log(name, price);
+  return (
+    <div style={productStyle}>
+      <h2>Name: {name} </h2>
+      <h3>Price: {price}</h3>
+      <button>Buy Now</button>
+
+    </div>
+  )
+}
+
 
 export default App;
