@@ -1,5 +1,4 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 
 function App() {
@@ -18,37 +17,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <ul>
-          <li style={{ color: 'yellow' }}>Nayok Names:</li>
-          {
-            nayoks.map(nayok => <li>{nayok}</li>)
-          }
-          <br />
-          <li>{nayoks[0]}</li>
-          <li>{nayoks[1]}</li>
-          <li>{nayoks[2]}</li>
-          <br />
-          <li style={{ color: 'red' }}>Products Name: </li>
-          {
-            products.map(product => <li>{product.name + " " + product.price}</li>)
-          }
-          <br />
+        <Counter />
+        <Users />
 
-
-        </ul>
         {/* //==============    Product             */}
         {
           products.map(product => <Product name={product.name} price={product.price} />)
         }
-        {/* ===================    Product2           */}
 
-        {
-          products.map(product => <Product2 product={product} />)
-        }
-        {/* ==================      Product3          */}
-        {
-          products.map(product => <Product3 product={product} />)
-        }
 
 
 
@@ -57,6 +33,51 @@ function App() {
 
     </div>
   );
+}
+//==================     Counter
+function Counter() {
+  const [count, setCount] = useState(0);
+  const handleCase = () => {
+    // console.log("CLicked");
+    const newCount = count + 1;
+    setCount(newCount);
+
+  }
+  return (
+    <div>
+      <h1>Count: {count} </h1>
+      <button onMouseMove={handleCase}>Increase</button>
+      <button onClick={() => setCount(count - 1)}>Decrease</button>
+    </div>
+  )
+}
+
+//============   Users
+function Users() {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(res => res.json())
+      .then(data => {
+        // console.log(data);
+        setUsers(data);
+      })
+  }, [])
+  return (
+    <div>
+      <h3>Dynamic Users: {users.length} </h3>
+      {
+        console.log(users)
+      }
+      {
+        users.map(user => <li>{user.name}</li>)
+      }
+      <ul style={{ color: 'red' }}>Email : </ul>
+      {
+        users.map(user => <li>{user.email}</li>)
+      }
+    </div>
+  )
 }
 
 //============================    
@@ -82,57 +103,5 @@ function Product(props) {
     </div>
   )
 }
-
-//==================================================  array hishebe patale
-function Product2(props) {
-  const productStyle = {
-
-    padding: '10px',
-    backgroundColor: 'yellow',
-    border: '1px solid gray',
-    borderRadius: '5px',
-    height: '200px',
-    weight: '200px',
-    float: 'left',
-
-
-  }
-  console.log(props.product.name);
-  return (
-    <div style={productStyle}>
-      <h2>Name: {props.product.name} </h2>
-      <h3>Price: {props.product.price}</h3>
-      <button>Buy Now</button>
-
-    </div>
-  )
-}
-
-//==================================================  array hishebe patale
-function Product3(props) {
-  const productStyle = {
-
-    padding: '10px',
-    backgroundColor: 'lightgray',
-    border: '1px solid gray',
-    borderRadius: '5px',
-    height: '200px',
-    weight: '200px',
-    float: 'left',
-
-
-  }
-  const { name, price } = props.product; //===========   component set kore
-  console.log(name, price);
-  return (
-    <div style={productStyle}>
-      <h2>Name: {name} </h2>
-      <h3>Price: {price}</h3>
-      <button>Buy Now</button>
-
-    </div>
-  )
-}
-
 
 export default App;
